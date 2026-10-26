@@ -18,6 +18,7 @@ import { IncomingCallNotification } from './components/call/IncomingCallNotifica
 import { StatusFeedModal } from './components/status/StatusFeedModal.js';
 import { CreateStatusModal } from './components/status/CreateStatusModal.js';
 import { SettingsModal } from './components/settings/SettingsModal.js';
+import { BharatLogo } from './components/common/BharatLogo.js';
 import { ShieldCheck } from 'lucide-react';
 
 export const App: React.FC = () => {
@@ -336,10 +337,54 @@ export const App: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#0b141a', color: '#fff' }}>
-        <img src="/logo.svg" alt="Bharat Chat" style={{ width: '80px', height: '80px', marginBottom: '16px', animation: 'pulse 1.5s infinite' }} />
-        <h2 style={{ fontWeight: 700, fontSize: '1.2rem' }}>Bharat Chat | ભારત ચેટ</h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', marginTop: '6px' }}>Connecting securely...</p>
+      <div style={{
+        height: '100vh',
+        width: '100vw',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#0b141a',
+        color: '#fff',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Subtle tricolor background glow */}
+        <div style={{
+          position: 'absolute',
+          width: '320px',
+          height: '320px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(0, 168, 132, 0.18) 0%, transparent 70%)',
+          pointerEvents: 'none'
+        }} />
+
+        <div style={{ zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <BharatLogo size={96} showText={true} />
+
+          {/* Loading progress bar */}
+          <div style={{
+            width: '180px',
+            height: '4px',
+            backgroundColor: 'rgba(255, 255, 255, 0.15)',
+            borderRadius: '4px',
+            overflow: 'hidden',
+            marginTop: '28px',
+            position: 'relative'
+          }}>
+            <div style={{
+              height: '100%',
+              width: '60%',
+              background: 'linear-gradient(90deg, #ff671f, #00a884)',
+              borderRadius: '4px',
+              animation: 'slideUp 1.2s infinite ease-in-out'
+            }} />
+          </div>
+
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.78rem', marginTop: '12px', letterSpacing: '0.5px' }}>
+            પ્રારંભ થઈ રહ્યું છે... (Initializing securely)
+          </p>
+        </div>
       </div>
     );
   }

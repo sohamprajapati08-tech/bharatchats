@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext.js';
 import { Shield, Sparkles, AlertCircle, Phone, Lock, User as UserIcon } from 'lucide-react';
+import { BharatLogo } from '../common/BharatLogo.js';
 
 export const AuthModal: React.FC = () => {
   const { login, register } = useAuth();
@@ -44,29 +45,14 @@ export const AuthModal: React.FC = () => {
         {/* Header with Bharat Branding */}
         <div style={{
           background: 'linear-gradient(135deg, #111b21 0%, #17242c 100%)',
-          padding: '28px 24px 20px',
+          padding: '24px 20px 18px',
           textAlign: 'center',
           borderBottom: '1px solid var(--border-light)',
           position: 'relative'
         }}>
-          <div style={{
-            width: '64px',
-            height: '64px',
-            margin: '0 auto 12px',
-            background: 'linear-gradient(135deg, #ff671f 0%, #00a884 100%)',
-            padding: '2px',
-            borderRadius: '50%',
-            boxShadow: '0 8px 24px rgba(0, 168, 132, 0.35)'
-          }}>
-            <img src="/logo.svg" alt="Bharat Chat" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
+          <div style={{ marginBottom: '12px' }}>
+            <BharatLogo size={70} showText={true} />
           </div>
-
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#e9edef', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-            Bharat Chat <span style={{ fontSize: '1rem', color: '#ff9933' }}>| ભારત ચેટ</span>
-          </h2>
-          <p style={{ fontSize: '0.82rem', color: '#8696a0', marginTop: '4px' }}>
-            Digital Sovereign Messenger for India 🇮🇳
-          </p>
         </div>
 
         {/* Notice Banner */}

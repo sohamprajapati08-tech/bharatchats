@@ -33,12 +33,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   useEffect(() => {
+    const minSplashPromise = new Promise((resolve) => setTimeout(resolve, 1200));
     const token = getAuthToken();
-    if (token) {
-      reloadUser().finally(() => setIsLoading(false));
-    } else {
+    const userPromise = token ? reloadUser() : Promise.resolve();
+
+    Promise.all([minSplashPromise, userPromise]).finally(() => {
       setIsLoading(false);
-    }
+    });
 
     const handleLogoutEvent = () => {
       setUser(null);
