@@ -1,0 +1,9 @@
+{
+  "appId": "in.bharatchat.app",
+  "appName": "Bharat Chat",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  }
+}

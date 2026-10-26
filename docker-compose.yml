@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: bharatchat-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: bharat
+      POSTGRES_PASSWORD: bharat_secure_password_2026
+      POSTGRES_DB: bharatchat
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bharat -d bharatchat"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bharatchat-api
+    restart: always
+    environment:
+      PORT: 5000
+      NODE_ENV: production
+      DATABASE_URL: postgresql://bharat:bharat_secure_password_2026@db:5432/bharatchat
+      JWT_ACCESS_SECRET: prod_access_secret_bharatchat_sovereign_12345
+      JWT_REFRESH_SECRET: prod_refresh_secret_bharatchat_sovereign_67890
+      UPLOAD_DIR: ./uploads
+      CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
+      STUN_SERVERS: stun:stun.l.google.com:19302,stun:stun1.l.google.com:19302
+    ports:
+      - "5000:5000"
+    volumes:
+      - bharatchat_uploads:/app/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  bharatchat_uploads:
